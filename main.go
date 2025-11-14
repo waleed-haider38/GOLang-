@@ -11,6 +11,7 @@ import (
 // := is only used with var and we do not need to explicity identify the type of variable so it save our time.
 // & this sign is concept of pointer use to store the address of a variable in go language. and variables are store in memory so it refers to our variable addressed where our variables or values are store.
 func main() {
+	myapp()
 	userName := "Waleed Haider"
 	// userAge := 23
 	bookings := []string{}
@@ -48,7 +49,7 @@ func main() {
 			fmt.Printf("These first name of  bookings :  %v \n", firstNames)
 
 			if remainingTickets == 0 {
-				fmt.Println("Our tickets are booked.Come again next tiem bye!")
+				fmt.Println("Our tickets are booked.Come again next time bye!")
 				break
 			}
 
