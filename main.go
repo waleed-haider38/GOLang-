@@ -26,32 +26,15 @@ func main() {
 	// fmt.Printf("I am %v years old\n", userAge)
 
 	var remainingTickets uint = 50
-	var userTickets uint
 
 	greetuser(userName, remainingTickets)
 
 	for {
-		var firstUser string
-		var lastUser string
-		var email string
 
-		// Taking Input from the user
+		firstUser, lastUser, email, userTickets := getUserInput()
 
-		fmt.Print("Enter your First Name: \n")
-		fmt.Scan(&firstUser)
-
-		fmt.Print("Enter your Last Name: \n")
-		fmt.Scan(&lastUser)
-
-		fmt.Print("Enter your email address: \n")
-		fmt.Scan(&email)
-
-		fmt.Print("Enter the number of tickets you want to buy : \n")
-		fmt.Scan(&userTickets)
-
-		isValidName := len(firstUser) >= 2 && len(lastUser) >= 2
-		isValidEmail := strings.Contains(email, "@")
-		isValidTickets := userTickets > 0 && userTickets <= remainingTickets
+		// calling function to validate user input
+		isValidName, isValidEmail, isValidTickets := validateUserInput(firstUser, lastUser, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTickets {
 			remainingTickets = remainingTickets - userTickets
@@ -60,13 +43,8 @@ func main() {
 			fmt.Printf("User Name is %v %v and his email address is %v \n", firstUser, lastUser, email)
 			fmt.Printf("Remaining Tickets are %v \n", remainingTickets)
 
-			firstNames := []string{}
-
-			for _, booking := range bookings {
-				var names = strings.Fields(booking)
-				firstNames = append(firstNames, names[0])
-			}
-
+			// calling the function to print first name
+			firstNames := printFirstName(bookings)
 			fmt.Printf("These first name of  bookings :  %v \n", firstNames)
 
 			if remainingTickets == 0 {
@@ -98,4 +76,31 @@ func greetuser(confName string, remainingTickets uint) {
 	fmt.Println("Lets enjoy this journey together")
 	fmt.Println("Lets make Booking App")
 	fmt.Printf("Remainig Tickets are %v \n", remainingTickets)
+}
+
+func printFirstName(bookings []string) []string {
+	firstNames := []string{}
+
+	for _, booking := range bookings {
+		var names = strings.Fields(booking)
+		firstNames = append(firstNames, names[0])
+	}
+	return firstNames
+}
+
+func getUserInput() (string, string, string, uint) {
+	var firstUser string
+	var lastUser string
+	var email string
+	var userTickets uint
+	// Taking Input from the user
+	fmt.Print("Enter your First Name: \n")
+	fmt.Scan(&firstUser)
+	fmt.Print("Enter your Last Name: \n")
+	fmt.Scan(&lastUser)
+	fmt.Print("Enter your email address: \n")
+	fmt.Scan(&email)
+	fmt.Print("Enter the number of tickets you want to buy : \n")
+	fmt.Scan(&userTickets)
+	return firstUser, lastUser, email, userTickets
 }
